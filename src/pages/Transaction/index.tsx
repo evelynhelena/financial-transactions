@@ -1,6 +1,6 @@
 import { Header } from "../../components/Header";
 import { CardInfoTransaction } from "./components/CardInfoTransaction";
-import { Container, Dflex, HeaderContent } from "./styles";
+import { ButtonSearch, Container, Dflex, HeaderContent, Input } from "./styles";
 
 export function Transactions() {
 	return (
@@ -32,8 +32,11 @@ export function Transactions() {
 				</Dflex>
 
 				<Dflex>
-					<input type="text" placeholder="Busque uma transação" />
-					<button>Buscar</button>
+					<Input type="text" placeholder="Busque uma transação" />
+					<ButtonSearch>
+						<i className="ri-search-line" />
+						<span>Buscar</span>
+					</ButtonSearch>
 				</Dflex>
 			</Container>
 		</HeaderContent>

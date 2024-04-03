@@ -21,9 +21,9 @@ export const BtnNewTransaction = styled.button`
     cursor: pointer;
     transform: calor;
    
-    transition: filter 0.2s;
+    transition: 0.3s;
 
     &:hover{
-        filter: brightness(0.9);
+        background-color: ${props => props.theme["green-300"]};
     }
 `;
