@@ -1,13 +1,14 @@
 import { Header } from "../../components/Header";
 import { CardInfoTransaction } from "./components/CardInfoTransaction";
-import { ButtonSearch, Container, Dflex, HeaderContent, Input } from "./styles";
+import { Summary } from "./components/Summary";
+import { ButtonSearch, Container, Row, HeaderContent, Input, Column } from "./styles";
 
 export function Transactions() {
 	return (
 		<HeaderContent>
 			<Container>
 				<Header />
-				<Dflex>
+				<Row>
 					<CardInfoTransaction
 						total={false}
 						type="entry"
@@ -29,15 +30,32 @@ export function Transactions() {
 						title="Total"
 						value="R$ 16.141,00"
 					/>
-				</Dflex>
+				</Row>
 
-				<Dflex>
+				<Row>
 					<Input type="text" placeholder="Busque uma transação" />
 					<ButtonSearch>
 						<i className="ri-search-line" />
 						<span>Buscar</span>
 					</ButtonSearch>
-				</Dflex>
+				</Row>
+
+				<Column>
+					<Summary
+						entry
+						title="Desenvolvimento de site"
+						value="R$ 12.000,00"
+						type="Venda"
+						date={new Date("04/13/2022")}
+					/>
+					<Summary
+						entry={false}
+						title="Hamburguer"
+						value="R$ 59,00"
+						type="Alimentação"
+						date={new Date("04/10/2022")}
+					/>
+				</Column>
 			</Container>
 		</HeaderContent>
 	);

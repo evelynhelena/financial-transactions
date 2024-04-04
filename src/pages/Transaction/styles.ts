@@ -13,7 +13,7 @@ export const Container = styled.div`
     padding: 0 0.625rem;
 `;
 
-export const Dflex = styled.div`
+export const Row = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,4 +52,11 @@ export const ButtonSearch = styled.button`
         background-color:  ${props => props.theme["green-300"]};
         color:  ${props => props.theme["white"]};
     }
+`;
+
+export const Column = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
 `;

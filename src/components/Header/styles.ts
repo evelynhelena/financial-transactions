@@ -1,3 +1,4 @@
+import ReactModal from "react-modal";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -26,4 +27,15 @@ export const BtnNewTransaction = styled.button`
     &:hover{
         background-color: ${props => props.theme["green-300"]};
     }
+`;
+
+
+
+export const Modal = styled(ReactModal)`
+    top: '50%';
+    left: '50%';
+    right: 'auto';
+    bottom: 'auto';
+    margin-right: '-50%';
+    transform: 'translate(-50%, -50%)';
 `;
