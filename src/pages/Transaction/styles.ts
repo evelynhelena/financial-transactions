@@ -21,18 +21,6 @@ export const Row = styled.div`
     margin-top: 2.5rem;
 `;
 
-export const Input = styled.input`
-    width: 100%;
-    padding: 1rem;
-    background-color: ${props => props.theme["gray-900"]};
-    border: 0;
-    border-radius: 0.375rem;
-    color: ${props => props.theme["white"]};
-    font-size: 1rem;
-    &:focus{
-        outline: 1px solid ${props => props.theme["green-300"]}; 
-    }
-`;
 
 export const ButtonSearch = styled.button`
     border: 1px solid ${props => props.theme["green-300"]};
@@ -42,7 +30,7 @@ export const ButtonSearch = styled.button`
     background-color: transparent;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1rem;
+    
     transition: 0.3s;
     display: flex;
     justify-content: center;

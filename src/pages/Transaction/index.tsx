@@ -1,7 +1,8 @@
 import { Header } from "../../components/Header";
+import { Input } from "../../styles/global";
 import { CardInfoTransaction } from "./components/CardInfoTransaction";
 import { Summary } from "./components/Summary";
-import { ButtonSearch, Container, Row, HeaderContent, Input, Column } from "./styles";
+import { ButtonSearch, Container, Row, HeaderContent, Column } from "./styles";
 
 export function Transactions() {
 	return (

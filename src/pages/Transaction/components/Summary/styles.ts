@@ -14,7 +14,7 @@ export const SummaryContent = styled.div`
 `;
 
 const TextData = () => css`
-    font-size: 1rem;
+    
     width: 100%;
     color: ${props => props.theme["gray-300"]};
 `;
@@ -29,7 +29,7 @@ export const TextInfoDate = styled.span`
 `;
 
 export const Value = styled.span<ValueProps>`
-    font-size: 1rem;
+    
     width: 100%;
     color: ${props => props.entry ? props.theme["green-300"] : props.theme["red-300"]}
 `;

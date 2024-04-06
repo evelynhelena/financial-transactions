@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import "remixicon/fonts/remixicon.css";
 
 export const GlobalStyle = createGlobalStyle`
@@ -24,4 +24,17 @@ export const GlobalStyle = createGlobalStyle`
         font: 400 1rem Roboto, sans-serif;
     }
 
+`;
+
+export const Input = styled.input`
+    width: 100%;
+    padding: 1rem;
+    background-color: ${props => props.theme["gray-900"]};
+    border: 0;
+    border-radius: 0.375rem;
+    color: ${props => props.theme["white"]};
+    
+    &:focus{
+        outline: 1px solid ${props => props.theme["green-300"]}; 
+    }
 `;

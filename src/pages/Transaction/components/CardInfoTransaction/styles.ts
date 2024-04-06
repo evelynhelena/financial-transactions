@@ -23,7 +23,7 @@ export const HeaderCard = styled.div`
 
 export const Title = styled.span<CardProps>`
     color: ${props => props.total ? props.theme["white"] : props.theme["gray-300"]};
-    font-size: 1rem;
+    
 `;
 
 export const Icon = styled.i<IconProps>`
