@@ -1,11 +1,13 @@
+
+import { dateFormat, currencyFormat } from "../../../../utils/format";
 import { SummaryContent, TextInfo, TextInfoDate, Value } from "./styles";
 
 interface SummaryProps {
     entry: boolean;
     title: string;
-    value: string;
+    value: number;
     type: string;
-    date: Date;
+    date: string;
 }
 
 export function Summary({ entry, title, value, type, date }: SummaryProps) {
@@ -13,9 +15,9 @@ export function Summary({ entry, title, value, type, date }: SummaryProps) {
     return (
         <SummaryContent>
             <TextInfo>{title}</TextInfo>
-            <Value entry={entry}>{!entry && "- "}{value}</Value>
+            <Value entry={entry ? "true" : "false"}>{!entry && "- "}{currencyFormat(value)}</Value>
             <TextInfo>{type}</TextInfo>
-            <TextInfoDate>{new Date(date).toDateString()}</TextInfoDate>
+            <TextInfoDate>{dateFormat(new Date(date))}</TextInfoDate>
         </SummaryContent>
     );
 }

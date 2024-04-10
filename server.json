@@ -1,0 +1,20 @@
+{
+  "transactions": [
+    {
+      "id": 1712707108690,
+      "entry": false,
+      "title": "Teste",
+      "value": 400,
+      "type": "Compra açogue",
+      "date": "2024-04-09T23:58:28.690Z"
+    },
+    {
+      "id": 1712707180430,
+      "entry": true,
+      "title": "teste",
+      "value": 800,
+      "type": "teste",
+      "date": "2024-04-09T23:59:40.430Z"
+    }
+  ]
+}

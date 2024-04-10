@@ -4,6 +4,7 @@ import { GlobalStyle } from "./styles/global";
 import { Transactions } from "./pages/Transaction";
 
 export function App() {
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />

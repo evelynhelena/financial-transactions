@@ -1,10 +1,36 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
+import api from "../../services/Api";
 import { Input } from "../../styles/global";
 import { CardInfoTransaction } from "./components/CardInfoTransaction";
 import { Summary } from "./components/Summary";
 import { ButtonSearch, Container, Row, HeaderContent, Column } from "./styles";
 
+interface TransactionsProps {
+	"id": number,
+	"entry": boolean,
+	"title": string,
+	"value": number,
+	"type": string,
+	"date": string
+}
+
 export function Transactions() {
+	const [transactions, setTransactions] = useState<TransactionsProps[]>([]);
+
+	const getTransacrions = async () => {
+		try {
+			const { data } = await api.get("/transactions");
+			setTransactions(data);
+		} catch {
+			console.log("ERRo");
+		}
+	};
+
+	useEffect(() => {
+		getTransacrions();
+	}, []);
+
 	return (
 		<HeaderContent>
 			<Container>
@@ -42,20 +68,16 @@ export function Transactions() {
 				</Row>
 
 				<Column>
-					<Summary
-						entry
-						title="Desenvolvimento de site"
-						value="R$ 12.000,00"
-						type="Venda"
-						date={new Date("04/13/2022")}
-					/>
-					<Summary
-						entry={false}
-						title="Hamburguer"
-						value="R$ 59,00"
-						type="Alimentação"
-						date={new Date("04/10/2022")}
-					/>
+					{transactions.map((transaction) => (
+						<Summary
+							key={transaction.id}
+							entry={transaction.entry}
+							title={transaction.title}
+							value={transaction.value}
+							type={transaction.type}
+							date={transaction.date}
+						/>
+					))}
 				</Column>
 			</Container>
 		</HeaderContent>

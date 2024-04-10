@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface CardProps {
-    total: boolean;
+    total: string;
 }
 
 interface IconProps {
@@ -10,7 +10,7 @@ interface IconProps {
 
 export const CardTransations = styled.div<CardProps>`
     width: 352px;
-    background-color: ${props => props.total ? props.theme["green-500"] : props.theme["gray-600"]};
+    background-color: ${props => props.total === "true" ? props.theme["green-500"] : props.theme["gray-600"]};
     padding: 1.5rem 2rem;
     border-radius: 0.375rem;
 `;
@@ -22,7 +22,7 @@ export const HeaderCard = styled.div`
 `;
 
 export const Title = styled.span<CardProps>`
-    color: ${props => props.total ? props.theme["white"] : props.theme["gray-300"]};
+    color: ${props => props.total === "true" ? props.theme["white"] : props.theme["gray-300"]};
     
 `;
 

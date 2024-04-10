@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 interface ValueProps {
-    entry: boolean;
+    entry: string;
 }
 
 export const SummaryContent = styled.div`
@@ -31,5 +31,5 @@ export const TextInfoDate = styled.span`
 export const Value = styled.span<ValueProps>`
     
     width: 100%;
-    color: ${props => props.entry ? props.theme["green-300"] : props.theme["red-300"]}
+    color: ${props => props.entry === "true" ? props.theme["green-300"] : props.theme["red-300"]}
 `;
