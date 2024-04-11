@@ -2,7 +2,7 @@ import Modal from "react-modal";
 import { ButtonCreat, ButtonEntry, ButtonExit, ButtonGroup, HeaderModal, Icon, ModalContent, Title, customStyles } from "./styles";
 import { Input } from "../../styles/global";
 import { useState } from "react";
-import api from "../../services/Api";
+import { useTransaction } from "../../hooks/useTrasactions";
 
 interface ModalComponentProps {
     modalIsOpen: boolean;
@@ -15,8 +15,9 @@ export function ModalComponet({ modalIsOpen, closeModal }: ModalComponentProps) 
     const [description, setDescription] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [category, setCategory] = useState<string>("");
+    const { createTransaction } = useTransaction();
 
-    const teste = () => {
+    const handeleCreateTransaction = () => {
         try {
             const data = {
                 "id": new Date().getTime(),
@@ -27,12 +28,11 @@ export function ModalComponet({ modalIsOpen, closeModal }: ModalComponentProps) 
                 "date": new Date().toISOString(),
             };
 
-            api.post("/transactions", data);
+            createTransaction(data);
+            closeModal();
         } catch {
             alert("Erro");
         }
-
-
     };
 
     return (
@@ -81,7 +81,7 @@ export function ModalComponet({ modalIsOpen, closeModal }: ModalComponentProps) 
                 </ButtonExit>
             </ButtonGroup>
 
-            <ButtonCreat onClick={() => teste()}>Cadastrar</ButtonCreat>
+            <ButtonCreat onClick={() => handeleCreateTransaction()}>Cadastrar</ButtonCreat>
         </Modal>
     );
 }

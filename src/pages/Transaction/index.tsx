@@ -1,35 +1,15 @@
-import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
-import api from "../../services/Api";
 import { Input } from "../../styles/global";
 import { CardInfoTransaction } from "./components/CardInfoTransaction";
 import { Summary } from "./components/Summary";
 import { ButtonSearch, Container, Row, HeaderContent, Column } from "./styles";
+import { useTransaction } from "../../hooks/useTrasactions";
 
-interface TransactionsProps {
-	"id": number,
-	"entry": boolean,
-	"title": string,
-	"value": number,
-	"type": string,
-	"date": string
-}
+
 
 export function Transactions() {
-	const [transactions, setTransactions] = useState<TransactionsProps[]>([]);
 
-	const getTransacrions = async () => {
-		try {
-			const { data } = await api.get("/transactions");
-			setTransactions(data);
-		} catch {
-			console.log("ERRo");
-		}
-	};
-
-	useEffect(() => {
-		getTransacrions();
-	}, []);
+	const { transaction } = useTransaction();
 
 	return (
 		<HeaderContent>
@@ -68,8 +48,9 @@ export function Transactions() {
 				</Row>
 
 				<Column>
-					{transactions.map((transaction) => (
+					{transaction.map((transaction) => (
 						<Summary
+							id={transaction.id}
 							key={transaction.id}
 							entry={transaction.entry}
 							title={transaction.title}

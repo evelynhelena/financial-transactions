@@ -1,8 +1,10 @@
 
+import { useTransaction } from "../../../../hooks/useTrasactions";
 import { dateFormat, currencyFormat } from "../../../../utils/format";
-import { SummaryContent, TextInfo, TextInfoDate, Value } from "./styles";
+import { Icon, SummaryContent, TextInfo, TextInfoDate, Value } from "./styles";
 
 interface SummaryProps {
+    id: number;
     entry: boolean;
     title: string;
     value: number;
@@ -10,7 +12,8 @@ interface SummaryProps {
     date: string;
 }
 
-export function Summary({ entry, title, value, type, date }: SummaryProps) {
+export function Summary({ id, entry, title, value, type, date }: SummaryProps) {
+    const { deleteTransaction } = useTransaction();
 
     return (
         <SummaryContent>
@@ -18,6 +21,12 @@ export function Summary({ entry, title, value, type, date }: SummaryProps) {
             <Value entry={entry ? "true" : "false"}>{!entry && "- "}{currencyFormat(value)}</Value>
             <TextInfo>{type}</TextInfo>
             <TextInfoDate>{dateFormat(new Date(date))}</TextInfoDate>
+            <Icon color="green-500">
+                <i className="ri-pencil-fill" />
+            </Icon>
+            <Icon color="red-300" onClick={() => deleteTransaction(id)}>
+                <i className="ri-delete-bin-line" />
+            </Icon>
         </SummaryContent>
     );
 }
