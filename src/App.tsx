@@ -3,6 +3,7 @@ import { defaultTheme } from "./styles/themes/default";
 import { GlobalStyle } from "./styles/global";
 import { Transactions } from "./pages/Transaction";
 import { TransactionProvider } from "./hooks/useTrasactions";
+import { ModalProvider } from "./hooks/useModal";
 
 export function App() {
 
@@ -10,7 +11,9 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <TransactionProvider>
-        <Transactions />
+        <ModalProvider>
+          <Transactions />
+        </ModalProvider>
       </TransactionProvider>
     </ThemeProvider>
   );

@@ -1,20 +1,24 @@
 import { BtnNewTransaction, Container, Image } from "./styles";
 import Logo from "../../assets/logo.svg";
-import { useState } from "react";
 import { ModalComponet } from "../Modal";
+import { useModal } from "../../hooks/useModal";
 
 export function Header() {
-	const [modalIsOpen, setIsOpen] = useState<boolean>(false);
 
-	function closeModal() {
-		setIsOpen(false);
-	}
+	const { closeModal, modalIsOpen, openModal, setIsEdting } = useModal();
+
 	return (
 		<Container>
 			<Image src={Logo} />
-			<BtnNewTransaction onClick={() => setIsOpen(true)}>Nova transação</BtnNewTransaction>
-
-			<ModalComponet closeModal={closeModal} modalIsOpen={modalIsOpen} />
+			<BtnNewTransaction
+				onClick={() => { openModal(); setIsEdting(false); }}
+			>
+				Nova transação
+			</BtnNewTransaction>
+			<ModalComponet
+				closeModal={closeModal}
+				modalIsOpen={modalIsOpen}
+			/>
 		</Container>
 	);
 }

@@ -3,7 +3,8 @@ import { ButtonCreat, ButtonEntry, ButtonExit, ButtonGroup, HeaderModal, Icon, M
 import { Input } from "../../styles/global";
 import { useState } from "react";
 import { useTransaction } from "../../hooks/useTrasactions";
-
+/* import { useModal } from "../../hooks/useModal";
+ */
 interface ModalComponentProps {
     modalIsOpen: boolean;
     closeModal: () => void;
@@ -16,11 +17,19 @@ export function ModalComponet({ modalIsOpen, closeModal }: ModalComponentProps) 
     const [price, setPrice] = useState<string>("");
     const [category, setCategory] = useState<string>("");
     const { createTransaction } = useTransaction();
+    /*       const { isEdting } = useModal();  */
+
+    const resetForm = () => {
+        setSelected("");
+        setDescription("");
+        setPrice("");
+        setCategory("");
+    };
 
     const handeleCreateTransaction = () => {
         try {
             const data = {
-                "id": new Date().getTime(),
+                "id": String(new Date().getTime()),
                 "entry": selected === "entry" && true,
                 "title": description,
                 "value": Number(price),
@@ -30,10 +39,17 @@ export function ModalComponet({ modalIsOpen, closeModal }: ModalComponentProps) 
 
             createTransaction(data);
             closeModal();
+            resetForm();
         } catch {
             alert("Erro");
         }
     };
+
+    /* if (isEdting && transactionById) {
+        setDescription(transactionById.title);
+        setPrice(String(transactionById.value));
+        setCategory(transactionById.type);
+    } */
 
     return (
         <Modal
