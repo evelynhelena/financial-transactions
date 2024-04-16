@@ -1,12 +1,20 @@
 {
   "transactions": [
     {
-      "id": "1712874678613",
+      "id": "1713292984526",
+      "entry": false,
+      "title": "Ida ao veterinário",
+      "value": 50,
+      "type": "uber",
+      "date": "2024-04-16T18:43:04.526Z"
+    },
+    {
+      "id": "1713293010836",
       "entry": true,
-      "title": "asdad",
-      "value": 555,
-      "type": "adasd",
-      "date": "2024-04-11T22:31:18.613Z"
+      "title": "Freela de desenvolvimento de site",
+      "value": 800,
+      "type": "Trabalho",
+      "date": "2024-04-16T18:43:30.836Z"
     }
   ]
 }

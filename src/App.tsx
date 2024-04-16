@@ -10,11 +10,11 @@ export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <TransactionProvider>
-        <ModalProvider>
+      <ModalProvider>
+        <TransactionProvider>
           <Transactions />
-        </ModalProvider>
-      </TransactionProvider>
+        </TransactionProvider>
+      </ModalProvider>
     </ThemeProvider>
   );
 }

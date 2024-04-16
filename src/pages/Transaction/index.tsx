@@ -9,7 +9,7 @@ import { useTransaction } from "../../hooks/useTrasactions";
 
 export function Transactions() {
 
-	const { transaction } = useTransaction();
+	const { transaction, entry, exit } = useTransaction();
 
 	return (
 		<HeaderContent>
@@ -18,24 +18,25 @@ export function Transactions() {
 				<Row>
 					<CardInfoTransaction
 						total={false}
+
 						type="entry"
 						iconType="ri-arrow-up-circle-line"
 						title="Entrada"
-						value="R$ 17.400,00"
+						value={entry}
 					/>
 					<CardInfoTransaction
 						total={false}
 						type="exit"
 						iconType="ri-arrow-down-circle-line"
 						title="Saída"
-						value="R$ 1.259,00"
+						value={exit}
 					/>
 					<CardInfoTransaction
 						total
 						type="total"
 						iconType="ri-money-dollar-circle-line"
 						title="Total"
-						value="R$ 16.141,00"
+						value={entry - exit}
 					/>
 				</Row>
 

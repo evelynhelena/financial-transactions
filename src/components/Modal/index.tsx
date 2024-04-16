@@ -1,30 +1,27 @@
 import Modal from "react-modal";
 import { ButtonCreat, ButtonEntry, ButtonExit, ButtonGroup, HeaderModal, Icon, ModalContent, Title, customStyles } from "./styles";
 import { Input } from "../../styles/global";
-import { useState } from "react";
 import { useTransaction } from "../../hooks/useTrasactions";
-/* import { useModal } from "../../hooks/useModal";
- */
+import { useModal } from "../../hooks/useModal";
+
 interface ModalComponentProps {
     modalIsOpen: boolean;
     closeModal: () => void;
 }
 
 export function ModalComponet({ modalIsOpen, closeModal }: ModalComponentProps) {
-
-    const [selected, setSelected] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
-    const [price, setPrice] = useState<string>("");
-    const [category, setCategory] = useState<string>("");
-    const { createTransaction } = useTransaction();
-    /*       const { isEdting } = useModal();  */
-
-    const resetForm = () => {
-        setSelected("");
-        setDescription("");
-        setPrice("");
-        setCategory("");
-    };
+    const { createTransaction, transactionById, editTransaction } = useTransaction();
+    const {
+        selected,
+        setSelected,
+        description,
+        setDescription,
+        price,
+        setPrice,
+        category,
+        setCategory,
+        isEdting } =
+        useModal();
 
     const handeleCreateTransaction = () => {
         try {
@@ -39,23 +36,36 @@ export function ModalComponet({ modalIsOpen, closeModal }: ModalComponentProps) 
 
             createTransaction(data);
             closeModal();
-            resetForm();
         } catch {
             alert("Erro");
         }
     };
 
-    /* if (isEdting && transactionById) {
-        setDescription(transactionById.title);
-        setPrice(String(transactionById.value));
-        setCategory(transactionById.type);
-    } */
+    const handeleEditTransaction = () => {
+        console.log("edit");
+        try {
+            const data = {
+                "id": transactionById?.id || "",
+                "entry": selected === "entry" && true,
+                "title": description,
+                "value": Number(price),
+                "type": category,
+                "date": transactionById?.date || "",
+            };
+
+            editTransaction(data);
+            closeModal();
+        } catch {
+            alert("Erro");
+        }
+    };
 
     return (
         <Modal
             style={customStyles}
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
+            ariaHideApp={false}
         >
             <HeaderModal>
                 <Icon className="ri-close-line" onClick={closeModal} />
@@ -97,7 +107,10 @@ export function ModalComponet({ modalIsOpen, closeModal }: ModalComponentProps) 
                 </ButtonExit>
             </ButtonGroup>
 
-            <ButtonCreat onClick={() => handeleCreateTransaction()}>Cadastrar</ButtonCreat>
+            <ButtonCreat
+                onClick={() => isEdting ? handeleEditTransaction() : handeleCreateTransaction()}>
+                {isEdting ? "Editar" : "Cadastrar"}
+            </ButtonCreat>
         </Modal>
     );
 }

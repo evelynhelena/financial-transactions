@@ -15,7 +15,7 @@ interface SummaryProps {
 
 export function Summary({ id, entry, title, value, type, date }: SummaryProps) {
     const { deleteTransaction, getTransacrionById } = useTransaction();
-    const { openModal, setIsEdting } = useModal();
+    const { openModal } = useModal();
 
     return (
         <SummaryContent>
@@ -23,7 +23,7 @@ export function Summary({ id, entry, title, value, type, date }: SummaryProps) {
             <Value entry={entry ? "true" : "false"}>{!entry && "- "}{currencyFormat(value)}</Value>
             <TextInfo>{type}</TextInfo>
             <TextInfoDate>{dateFormat(new Date(date))}</TextInfoDate>
-            <Icon color="green-500" onClick={() => { openModal(); setIsEdting(true); getTransacrionById(id); }}>
+            <Icon color="green-500" onClick={() => { openModal(); getTransacrionById(id); }}>
                 <i className="ri-pencil-fill" />
             </Icon>
             <Icon color="red-300" onClick={() => deleteTransaction(id)}>

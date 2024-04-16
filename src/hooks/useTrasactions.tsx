@@ -1,7 +1,8 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import api from "../services/Api";
+import { useModal } from "./useModal";
 
-interface TransactionsProps {
+export interface TransactionsProps {
     "id": string,
     "entry": boolean,
     "title": string,
@@ -15,7 +16,10 @@ interface TransactionProviderProps {
 interface TransactionData {
     transaction: TransactionsProps[];
     transactionById?: TransactionsProps;
+    entry: number;
+    exit: number;
     createTransaction: (data: TransactionsProps) => void;
+    editTransaction: (data: TransactionsProps) => void;
     getTransacrionById: (id: string) => void;
     deleteTransaction: (id: string) => void;
 }
@@ -26,10 +30,31 @@ export const TransactionContext = createContext<TransactionData>({} as Transacti
 export function TransactionProvider({ children }: TransactionProviderProps) {
     const [transaction, seTransaction] = useState<TransactionsProps[]>([]);
     const [transactionById, seTransactionById] = useState<TransactionsProps>();
+    const [entry, seEntry] = useState<number>(0);
+    const [exit, seExit] = useState<number>(0);
+    const { editValues } = useModal();
+
+
+
+    const sumValues = (data: number[]) => {
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) {
+            sum += data[i];
+        }
+        return sum;
+    };
+
+    const calcValues = (data: TransactionsProps[]) => {
+        const entryValue = data.map((el) => el.entry ? el.value : 0);
+        const exitValue = data.map((el) => !el.entry ? el.value : 0);
+        seEntry(sumValues(entryValue));
+        seExit(sumValues(exitValue));
+    };
 
     const getTransacrions = async () => {
         try {
-            const { data } = await api.get("/transactions");
+            const { data }: { data: TransactionsProps[] } = await api.get("/transactions");
+            calcValues(data);
             seTransaction(data);
         } catch {
             console.log("ERRo");
@@ -40,6 +65,7 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
         try {
             const { data } = await api.get(`/transactions/${id}`);
             seTransactionById(data);
+            editValues(data);
         } catch {
             console.log("ERRo");
         }
@@ -48,7 +74,16 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
     const createTransaction = async (data: TransactionsProps) => {
         try {
             await api.post("/transactions", data);
-            seTransaction(old => [...old, data]);
+            await getTransacrions();
+        } catch {
+            alert("Erro");
+        }
+    };
+
+    const editTransaction = async (data: TransactionsProps) => {
+        try {
+            await api.put(`/transactions/${data.id}`, data);
+            await getTransacrions();
         } catch {
             alert("Erro");
         }
@@ -57,7 +92,7 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
     const deleteTransaction = async (id: string) => {
         try {
             await api.delete(`/transactions/${id}`);
-            seTransaction(transaction.filter(el => el.id !== id));
+            await getTransacrions();
         } catch {
             alert("Erro");
         }
@@ -68,7 +103,18 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
     }, []);
 
     return (
-        <TransactionContext.Provider value={{ transaction, createTransaction, deleteTransaction, getTransacrionById, transactionById }}>
+        <TransactionContext.Provider
+            value={{
+                transaction,
+                createTransaction,
+                deleteTransaction,
+                getTransacrionById,
+                transactionById,
+                editTransaction,
+                entry,
+                exit,
+            }}
+        >
             {children}
         </TransactionContext.Provider>
     );

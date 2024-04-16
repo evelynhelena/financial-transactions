@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface CardProps {
     total: string;
+    color?: string;
 }
 
 interface IconProps {
@@ -10,7 +11,7 @@ interface IconProps {
 
 export const CardTransations = styled.div<CardProps>`
     width: 352px;
-    background-color: ${props => props.total === "true" ? props.theme["green-500"] : props.theme["gray-600"]};
+    background-color: ${props => props.total === "true" ? props.theme[props.color || ""] : props.theme["gray-600"]};
     padding: 1.5rem 2rem;
     border-radius: 0.375rem;
 `;
