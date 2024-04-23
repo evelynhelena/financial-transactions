@@ -2,14 +2,21 @@ import { Header } from "../../components/Header";
 import { Input } from "../../styles/global";
 import { CardInfoTransaction } from "./components/CardInfoTransaction";
 import { Summary } from "./components/Summary";
-import { ButtonSearch, Container, Row, HeaderContent, Column } from "./styles";
+import { Container, Row, HeaderContent, Column, ButtonSearch } from "./styles";
 import { useTransaction } from "../../hooks/useTrasactions";
+import { useState } from "react";
 
 
 
 export function Transactions() {
+	const { transaction, entry, exit, search, getTransacrions } = useTransaction();
+	const [searchValue, setSearchValue] = useState<string>("");
 
-	const { transaction, entry, exit } = useTransaction();
+	const handleSearch = async (value: string) => {
+		await getTransacrions(value);
+		setSearchValue(value);
+		search(searchValue);
+	};
 
 	return (
 		<HeaderContent>
@@ -41,8 +48,8 @@ export function Transactions() {
 				</Row>
 
 				<Row>
-					<Input type="text" placeholder="Busque uma transação" />
-					<ButtonSearch>
+					<Input type="text" placeholder="Busque uma transação" value={searchValue} onChange={({ target }) => setSearchValue(target.value)} />
+					<ButtonSearch onClick={() => handleSearch(searchValue)}>
 						<i className="ri-search-line" />
 						<span>Buscar</span>
 					</ButtonSearch>

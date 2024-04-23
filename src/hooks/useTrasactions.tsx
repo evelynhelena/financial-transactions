@@ -18,10 +18,12 @@ interface TransactionData {
     transactionById?: TransactionsProps;
     entry: number;
     exit: number;
+    getTransacrions: (query?: string) => Promise<void>;
     createTransaction: (data: TransactionsProps) => void;
     editTransaction: (data: TransactionsProps) => void;
     getTransacrionById: (id: string) => void;
     deleteTransaction: (id: string) => void;
+    search: (value: string) => void;
 }
 
 
@@ -51,13 +53,14 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
         seExit(sumValues(exitValue));
     };
 
-    const getTransacrions = async () => {
+    const getTransacrions = async (query?: string) => {
         try {
-            const { data }: { data: TransactionsProps[] } = await api.get("/transactions");
+
+            const { data }: { data: TransactionsProps[] } = await api.get(query ? `/transactions?q=${query}` : "/transactions");
             calcValues(data);
             seTransaction(data);
         } catch {
-            console.log("ERRo");
+            console.log("ERRo Get");
         }
     };
 
@@ -98,6 +101,10 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
         }
     };
 
+    const search = (value: string) => {
+        console.log(value);
+    };
+
     useEffect(() => {
         getTransacrions();
     }, []);
@@ -105,6 +112,7 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
     return (
         <TransactionContext.Provider
             value={{
+                getTransacrions,
                 transaction,
                 createTransaction,
                 deleteTransaction,
@@ -113,6 +121,7 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
                 editTransaction,
                 entry,
                 exit,
+                search
             }}
         >
             {children}

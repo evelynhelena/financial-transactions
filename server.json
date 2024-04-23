@@ -1,20 +1,36 @@
 {
   "transactions": [
     {
-      "id": "1713292984526",
-      "entry": false,
-      "title": "Ida ao veterinário",
-      "value": 50,
-      "type": "uber",
-      "date": "2024-04-16T18:43:04.526Z"
+      "id": "1713293430977",
+      "entry": true,
+      "title": "teste2",
+      "value": 1500,
+      "type": "Teste",
+      "date": "2024-04-16T18:50:30.977Z"
     },
     {
-      "id": "1713293010836",
+      "id": "1713913371507",
       "entry": true,
-      "title": "Freela de desenvolvimento de site",
-      "value": 800,
-      "type": "Trabalho",
-      "date": "2024-04-16T18:43:30.836Z"
+      "title": "teste 1",
+      "value": 5000,
+      "type": "teste 1",
+      "date": "2024-04-23T23:02:51.507Z"
+    },
+    {
+      "id": "1713913381308",
+      "entry": true,
+      "title": "asdasd",
+      "value": 66,
+      "type": "asdasd",
+      "date": "2024-04-23T23:03:01.308Z"
+    },
+    {
+      "id": "1713913443917",
+      "entry": true,
+      "title": "asdsad",
+      "value": 66,
+      "type": "sdasd",
+      "date": "2024-04-23T23:04:03.917Z"
     }
   ]
 }
